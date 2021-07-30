@@ -1,4 +1,5 @@
 ﻿using Plugin.Media;
+using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +12,8 @@ namespace SocialMojifier
 {
     public partial class MainPage : ContentPage
     {
+        public MediaFile capturedImage;
+        public string filePath;
         public MainPage()
         {
             InitializeComponent();
@@ -42,7 +45,8 @@ namespace SocialMojifier
                 return;
             }
 
-            //await DisplayAlert("File Location", file.Path, "OK");
+            capturedImage = file;
+            filePath = file.Path;
 
             Capture.Source = ImageSource.FromStream(() =>
             {
@@ -57,7 +61,7 @@ namespace SocialMojifier
         {
             if (Capture.Source != null)
             {
-                Navigation.PushModalAsync(new EmotionDetection(Capture));
+                Navigation.PushModalAsync(new EmotionDetection(capturedImage, filePath));
             }
         }
     }
