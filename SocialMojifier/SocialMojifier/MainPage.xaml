@@ -12,11 +12,11 @@
             Text="Capture Image"
             Clicked="CaptureImage_Clicked"/>
         <Image
-            x:Name="Capture"
-            Source="" />
+            x:Name="Capture" />
         <Button 
             x:Name="GetEmotion"
             Text="Get Emotion"
-            Clicked="GetEmotion_Clicked"/>
+            Clicked="GetEmotion_Clicked"
+            IsVisible="False"/>
     </StackLayout>
 </ContentPage>

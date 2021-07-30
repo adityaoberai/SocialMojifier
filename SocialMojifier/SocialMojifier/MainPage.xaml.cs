@@ -14,6 +14,10 @@ namespace SocialMojifier
         public MainPage()
         {
             InitializeComponent();
+
+            Capture.Source = null;
+            GetEmotion.IsVisible = false;
+            GetEmotion.IsEnabled = false;
         }
 
         private async void CaptureImage_Clicked(object sender, EventArgs e)
@@ -38,18 +42,23 @@ namespace SocialMojifier
                 return;
             }
 
-            await DisplayAlert("File Location", file.Path, "OK");
+            //await DisplayAlert("File Location", file.Path, "OK");
 
             Capture.Source = ImageSource.FromStream(() =>
             {
                 var stream = file.GetStream();
                 return stream;
             });
+            GetEmotion.IsVisible = true;
+            GetEmotion.IsEnabled = true;
         }
 
         private void GetEmotion_Clicked(object sender, EventArgs e)
         {
-
+            if (Capture.Source != null)
+            {
+                Navigation.PushModalAsync(new EmotionDetection(Capture));
+            }
         }
     }
 }
