@@ -14,5 +14,9 @@
         <Image
             x:Name="Capture"
             Source="" />
+        <Button 
+            x:Name="GetEmotion"
+            Text="Get Emotion"
+            Clicked="GetEmotion_Clicked"/>
     </StackLayout>
 </ContentPage>

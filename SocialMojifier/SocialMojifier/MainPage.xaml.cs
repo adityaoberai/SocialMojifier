@@ -46,5 +46,10 @@ namespace SocialMojifier
                 return stream;
             });
         }
+
+        private void GetEmotion_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }
