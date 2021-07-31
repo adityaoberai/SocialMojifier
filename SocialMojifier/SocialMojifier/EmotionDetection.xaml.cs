@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -14,9 +15,10 @@ using Plugin.Media.Abstractions;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using SocialMojifier.Models;
-using System.Reflection;
 using System.Drawing.Imaging;
 using Plugin.ImageResizer;
+using Plugin.Media;
+using SkiaSharp;
 
 namespace SocialMojifier
 {
@@ -24,11 +26,17 @@ namespace SocialMojifier
     public partial class EmotionDetection : ContentPage
     {
         public MediaFile capture;
+        private SKBitmap Image;
+        private SkiaSharpDrawingService skiaDrawingService;
+        private bool drawemoji = true;
+        private Lazy<List<SMDetectedFace>> detectedFaces = new Lazy<List<SMDetectedFace>>();
         public EmotionDetection(MediaFile image, string filePath)
         {
             InitializeComponent();
+            skiaDrawingService = new SkiaSharpDrawingService();
             capture = image;
             DetectEmotion();
+            SetImageInImageView(capture);
         }
 
         public async void DetectEmotion()
@@ -41,39 +49,47 @@ namespace SocialMojifier
                 await DisplayAlert("Response", "Face Not Detected", "Ok");
                 await Navigation.PopModalAsync();
             }
-            var detectedFace = new SMDetectedFace
+            detectedFaces.Value.Add(new SMDetectedFace
             {
                 FaceRectangle = face.FaceRectangle,
-            };
-            var getEmotionImage = new GetEmotionImage();
-            
-            detectedFace.PredominantEmotion = FindPredominantEmotion(face.FaceAttributes.Emotion);
-            /*
-            System.Drawing.Image backImg = System.Drawing.Image.FromStream(capture.GetStream());
-
-            System.Drawing.Image mrkImg = System.Drawing.Image.FromFile(getEmotionImage.GetImageResourceId(detectedFace.PredominantEmotion).ToString());
-            Graphics g = Graphics.FromImage(backImg);
-            g.DrawImage(mrkImg, face.FaceRectangle.Left, face.FaceRectangle.Top, face.FaceRectangle.Width, face.FaceRectangle.Height);
-            */
-            EmojifiedImage.Source = getEmotionImage.GetImageResourceId(detectedFace.PredominantEmotion).ToString();
-            //byte[] resizedImage = await CrossImageResizer.Current.ResizeImageWithAspectRatioAsync(byteData, face.FaceRectangle.Width, face.FaceRectangle.Height);
+                PredominantEmotion = FindPredominantEmotion(face.FaceAttributes.Emotion)
+            });
+            capturedImage.InvalidateSurface();
         }
 
-        public byte[] GetImageAsByteArray(string imageFilePath)
-        {
-            using (FileStream fileStream = new FileStream(imageFilePath, FileMode.Open, FileAccess.Read))
+        private void CapturedImage_PaintSurface(object sender, SkiaSharp.Views.Forms.SKPaintSurfaceEventArgs args)
+        {            
+            var info = args.Info;
+            var canvas = args.Surface.Canvas;
+            skiaDrawingService.ClearCanvas(info, canvas);
+            if (Image != null)
             {
-                BinaryReader binaryReader = new BinaryReader(fileStream);
-                return binaryReader.ReadBytes((int)fileStream.Length);
+                try
+                {
+                    var scale = Math.Min(info.Width / (float)Image.Width, info.Height / (float)Image.Height);
+
+                    var scaleHeight = scale * Image.Height;
+                    var scaleWidth = scale * Image.Width;
+
+                    var top = (info.Height - scaleHeight) / 2;
+                    var left = (info.Width - scaleWidth) / 2;
+
+                    canvas.DrawBitmap(Image, new SKRect(left, top, left + scaleWidth, top + scaleHeight));
+                    
+                    skiaDrawingService.DrawPrediction(canvas, detectedFaces.Value.FirstOrDefault().FaceRectangle, left, top, scale, detectedFaces.Value.FirstOrDefault().PredominantEmotion, drawemoji);
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+                //skiaDrawingService.DrawEmotiocon(info, canvas, face.PredominantEmotion);
             }
         }
 
-        public Stream ToStream(System.Drawing.Image image, ImageFormat format)
+        private void SetImageInImageView(MediaFile image)
         {
-            var stream = new MemoryStream();
-            image.Save(stream, format);
-            stream.Position = 0;
-            return stream;
+            Image = SKBitmap.Decode(image.GetStreamWithImageRotatedForExternalStorage());
+            capturedImage.InvalidateSurface();
         }
 
         public async Task<DetectedFace> FaceAPIDetection(IFaceClient client)

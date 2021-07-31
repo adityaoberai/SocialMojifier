@@ -33,7 +33,7 @@ namespace SocialMojifier
                 return;
             }
 
-            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+            var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
             {
                 Directory = "SocialMojifier",
                 Name = "capture.jpg",

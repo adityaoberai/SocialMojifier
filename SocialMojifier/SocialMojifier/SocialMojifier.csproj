@@ -11,8 +11,32 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Emojis\angry.png" />
+    <None Remove="Emojis\disgust.png" />
+    <None Remove="Emojis\dislike.png" />
+    <None Remove="Emojis\fear.png" />
+    <None Remove="Emojis\happy.png" />
+    <None Remove="Emojis\neutral.png" />
+    <None Remove="Emojis\sad.png" />
+    <None Remove="Emojis\surprised.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Emojis\angry.png" />
+    <EmbeddedResource Include="Emojis\disgust.png" />
+    <EmbeddedResource Include="Emojis\dislike.png" />
+    <EmbeddedResource Include="Emojis\fear.png" />
+    <EmbeddedResource Include="Emojis\happy.png" />
+    <EmbeddedResource Include="Emojis\neutral.png" />
+    <EmbeddedResource Include="Emojis\sad.png" />
+    <EmbeddedResource Include="Emojis\surprised.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.Face" Version="2.8.0-preview.1" />
     <PackageReference Include="Plugin.ImageResizer" Version="1.0.1-alpha" />
+    <PackageReference Include="SkiaSharp" Version="2.80.3" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.3" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />

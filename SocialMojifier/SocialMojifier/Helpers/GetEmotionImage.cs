@@ -4,11 +4,11 @@ using System.Text;
 
 namespace SocialMojifier.Helpers
 {
-    public class GetEmotionImage
+    public static class GetEmotionImage
     {
-        public StringBuilder GetImageResourceId(string emotion)
+        public static StringBuilder GetImageResourceId(string emotion)
         {
-            StringBuilder resId = new StringBuilder("");
+            StringBuilder resId = new StringBuilder("SocialMojifier.Emojis.");
             switch (emotion)
             {
                 case "Anger":

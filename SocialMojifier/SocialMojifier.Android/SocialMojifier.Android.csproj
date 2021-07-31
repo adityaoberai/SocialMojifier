@@ -63,6 +63,9 @@
     <PackageReference Include="Plugin.ImageResizer">
       <Version>1.0.1-alpha</Version>
     </PackageReference>
+    <PackageReference Include="SkiaSharp.Views.Forms">
+      <Version>2.80.3</Version>
+    </PackageReference>
     <PackageReference Include="Xam.Plugin.Media">
       <Version>5.0.1</Version>
     </PackageReference>

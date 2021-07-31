@@ -1,15 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              x:Class="SocialMojifier.EmotionDetection">
     <ContentPage.Content>
-        <StackLayout>
-            <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-                <Label Text="Emojified Image" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-            </Frame>
-            <Image 
-                x:Name="EmojifiedImage"
-                Source="" />
-        </StackLayout>
+        <forms:SKCanvasView 
+                x:Name="capturedImage" 
+                PaintSurface="CapturedImage_PaintSurface" />
+       
     </ContentPage.Content>
 </ContentPage>
