@@ -35,9 +35,11 @@ namespace SocialMojifier
 
             var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
             {
-                Directory = "Sample",
-                Name = "test.jpg",
-                SaveToAlbum = true
+                Directory = "SocialMojifier",
+                Name = "capture.jpg",
+                SaveToAlbum = true,
+                PhotoSize = PhotoSize.Medium,
+                DefaultCamera = CameraDevice.Front
             });
 
             if (file == null)
