@@ -16,6 +16,7 @@ using System.Net.Http.Headers;
 using SocialMojifier.Models;
 using System.Reflection;
 using System.Drawing.Imaging;
+using Plugin.ImageResizer;
 
 namespace SocialMojifier
 {
@@ -55,12 +56,21 @@ namespace SocialMojifier
             g.DrawImage(mrkImg, face.FaceRectangle.Left, face.FaceRectangle.Top, face.FaceRectangle.Width, face.FaceRectangle.Height);
             */
             EmojifiedImage.Source = getEmotionImage.GetImageResourceId(detectedFace.PredominantEmotion).ToString();
+            //byte[] resizedImage = await CrossImageResizer.Current.ResizeImageWithAspectRatioAsync(byteData, face.FaceRectangle.Width, face.FaceRectangle.Height);
+        }
 
+        public byte[] GetImageAsByteArray(string imageFilePath)
+        {
+            using (FileStream fileStream = new FileStream(imageFilePath, FileMode.Open, FileAccess.Read))
+            {
+                BinaryReader binaryReader = new BinaryReader(fileStream);
+                return binaryReader.ReadBytes((int)fileStream.Length);
+            }
         }
 
         public Stream ToStream(System.Drawing.Image image, ImageFormat format)
         {
-            var stream = new System.IO.MemoryStream();
+            var stream = new MemoryStream();
             image.Save(stream, format);
             stream.Position = 0;
             return stream;

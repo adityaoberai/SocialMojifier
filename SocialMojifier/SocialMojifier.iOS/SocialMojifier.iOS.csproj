@@ -129,6 +129,9 @@
     <PackageReference Include="NETStandard.Library">
       <Version>2.0.3</Version>
     </PackageReference>
+    <PackageReference Include="Plugin.ImageResizer">
+      <Version>1.0.1-alpha</Version>
+    </PackageReference>
     <PackageReference Include="Xam.Plugin.Media">
       <Version>5.0.1</Version>
     </PackageReference>
@@ -141,5 +144,29 @@
       <Project>{88547BB3-26A5-41E4-BB55-154A1489722C}</Project>
       <Name>SocialMojifier</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\surprised.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\sad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\neutral.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\happy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\fear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\dislike.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\disgust.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\angry.png" />
   </ItemGroup>
 </Project>

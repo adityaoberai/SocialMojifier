@@ -12,28 +12,28 @@ namespace SocialMojifier.Helpers
             switch (emotion)
             {
                 case "Anger":
-                    resId.Append("https://raw.githubusercontent.com/adityaoberai/SocialMojifier/main/SocialMojifier/SocialMojifier/Emojis/angry.png?token=AHPSLXIRIZUJQSQKUKJ5XDLBBZPMI");
+                    resId.Append("angry.png");
                     break;
                 case "Contempt":
-                    resId.Append("https://raw.githubusercontent.com/adityaoberai/SocialMojifier/main/SocialMojifier/SocialMojifier/Emojis/dislike.png?token=AHPSLXJH7QHDBZMPOYFV3UTBBZPNI");
+                    resId.Append("dislike.png");
                     break;
                 case "Disgust":
-                    resId.Append("https://raw.githubusercontent.com/adityaoberai/SocialMojifier/main/SocialMojifier/SocialMojifier/Emojis/disgust.png?token=AHPSLXKKFVQSONXMCP3QYY3BBZPOI");
+                    resId.Append("disgust.png");
                     break;
                 case "Fear":
-                    resId.Append("https://raw.githubusercontent.com/adityaoberai/SocialMojifier/main/SocialMojifier/SocialMojifier/Emojis/fear.png?token=AHPSLXOSGIDZ5X7UEMRKTCTBBZPPK");
+                    resId.Append("fear.png");
                     break;
                 case "Happiness":
-                    resId.Append("https://raw.githubusercontent.com/adityaoberai/SocialMojifier/main/SocialMojifier/SocialMojifier/Emojis/happy.png?token=AHPSLXOC5TVMYNHPJO522UDBBZPH2");
+                    resId.Append("happy.png");
                     break;
                 case "Neutral":
-                    resId.Append("https://raw.githubusercontent.com/adityaoberai/SocialMojifier/main/SocialMojifier/SocialMojifier/Emojis/neutral.png?token=AHPSLXOZTIHLZG66X4KQPWTBBZPQ2");
+                    resId.Append("neutral.png");
                     break;
                 case "Sadness":
-                    resId.Append("https://raw.githubusercontent.com/adityaoberai/SocialMojifier/main/SocialMojifier/SocialMojifier/Emojis/sad.png?token=AHPSLXN4ILZVLTWUFA2BH7TBBZPRW");
+                    resId.Append("sad.png");
                     break;
                 case "Surprise":
-                    resId.Append("https://raw.githubusercontent.com/adityaoberai/SocialMojifier/main/SocialMojifier/SocialMojifier/Emojis/surprised.png?token=AHPSLXPGKJSM7XUNIMFIHB3BBZPTY");
+                    resId.Append("surprised.png");
                     break;
 
             }
