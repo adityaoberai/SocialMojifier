@@ -7,6 +7,5 @@
         <forms:SKCanvasView 
                 x:Name="capturedImage" 
                 PaintSurface="CapturedImage_PaintSurface" />
-       
     </ContentPage.Content>
 </ContentPage>

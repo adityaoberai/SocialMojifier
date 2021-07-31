@@ -20,7 +20,7 @@ namespace SocialMojifier.Helpers
             canvas.DrawRect(info.Rect, paint);
         }
 
-        public async void DrawPrediction(SKCanvas canvas, FaceRectangle box, float left, float top, float scale, string emotion, bool showEmoji)
+        public SKCanvas DrawPrediction(SKCanvas canvas, FaceRectangle box, float left, float top, float scale, string emotion, bool showEmoji)
         {
             var scaledBoxLeft = left + (scale * box.Left);
             var scaledBoxWidth = scale * box.Width;
@@ -28,6 +28,7 @@ namespace SocialMojifier.Helpers
             var scaledBoxHeight = scale * box.Height;
             SKBitmap Image = GetEmojiBitmap(emotion);
             canvas.DrawBitmap(Image, new SKRect(scaledBoxLeft, scaledBoxTop, scaledBoxLeft + scaledBoxWidth, scaledBoxTop + scaledBoxHeight));
+            return canvas;
         }
 
 

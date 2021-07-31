@@ -35,11 +35,11 @@ namespace SocialMojifier
 
             var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
             {
+                DefaultCamera = CameraDevice.Front,
+                PhotoSize = PhotoSize.Medium,
                 Directory = "SocialMojifier",
                 Name = "capture.jpg",
-                SaveToAlbum = true,
-                PhotoSize = PhotoSize.Medium,
-                DefaultCamera = CameraDevice.Front
+                SaveToAlbum = true
             });
 
             if (file == null)

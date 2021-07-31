@@ -30,6 +30,8 @@ namespace SocialMojifier
         private SkiaSharpDrawingService skiaDrawingService;
         private bool drawemoji = true;
         private Lazy<List<SMDetectedFace>> detectedFaces = new Lazy<List<SMDetectedFace>>();
+        public SKCanvas canvas;
+        public SKSurface surface;
         public EmotionDetection(MediaFile image, string filePath)
         {
             InitializeComponent();
@@ -58,9 +60,10 @@ namespace SocialMojifier
         }
 
         private void CapturedImage_PaintSurface(object sender, SkiaSharp.Views.Forms.SKPaintSurfaceEventArgs args)
-        {            
+        {
             var info = args.Info;
-            var canvas = args.Surface.Canvas;
+            surface = args.Surface;
+            canvas = args.Surface.Canvas;
             skiaDrawingService.ClearCanvas(info, canvas);
             if (Image != null)
             {
@@ -75,14 +78,13 @@ namespace SocialMojifier
                     var left = (info.Width - scaleWidth) / 2;
 
                     canvas.DrawBitmap(Image, new SKRect(left, top, left + scaleWidth, top + scaleHeight));
-                    
-                    skiaDrawingService.DrawPrediction(canvas, detectedFaces.Value.FirstOrDefault().FaceRectangle, left, top, scale, detectedFaces.Value.FirstOrDefault().PredominantEmotion, drawemoji);
+
+                    canvas = skiaDrawingService.DrawPrediction(canvas, detectedFaces.Value.FirstOrDefault().FaceRectangle, left, top, scale, detectedFaces.Value.FirstOrDefault().PredominantEmotion, drawemoji);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.ToString());
                 }
-                //skiaDrawingService.DrawEmotiocon(info, canvas, face.PredominantEmotion);
             }
         }
 
@@ -94,7 +96,7 @@ namespace SocialMojifier
 
         public async Task<DetectedFace> FaceAPIDetection(IFaceClient client)
         {
-            var faceAPIResponseList = await client.Face.DetectWithStreamAsync(capture.GetStream(), 
+            var faceAPIResponseList = await client.Face.DetectWithStreamAsync(capture.GetStream(),
                 returnFaceAttributes: new List<FaceAttributeType> { FaceAttributeType.Emotion });
 
             return faceAPIResponseList.FirstOrDefault();
