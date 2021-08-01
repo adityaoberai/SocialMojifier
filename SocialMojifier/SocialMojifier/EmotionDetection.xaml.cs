@@ -2,21 +2,15 @@
 using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using SocialMojifier.Helpers;
 using System.IO;
 using Plugin.Media.Abstractions;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using SocialMojifier.Models;
-using System.Drawing.Imaging;
-using Plugin.Media;
 using SkiaSharp;
 using Xamarin.Essentials;
 
@@ -137,7 +131,6 @@ namespace SocialMojifier
             documentsPath = Path.Combine(documentsPath, "SocialMojifier");
             Directory.CreateDirectory(documentsPath);
             string filePath = Path.Combine(documentsPath, $"result-{DateTime.Now.ToString()}.jpg");
-            Console.WriteLine(filePath);
             byte[] bArray = new byte[data.Length];
             FileStream fs = new FileStream(filePath, FileMode.CreateNew);
             bArray = imageStream.ToArray();
