@@ -18,6 +18,7 @@
             x:Name="GetEmotion"
             Text="Get Emotion"
             Clicked="GetEmotion_Clicked"
+            VerticalOptions="CenterAndExpand"
             IsVisible="False"/>
     </StackLayout>
 </ContentPage>
