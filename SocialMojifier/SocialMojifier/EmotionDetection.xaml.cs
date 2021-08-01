@@ -16,9 +16,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using SocialMojifier.Models;
 using System.Drawing.Imaging;
-using Plugin.ImageResizer;
 using Plugin.Media;
 using SkiaSharp;
+using Xamarin.Essentials;
 
 namespace SocialMojifier
 {
@@ -32,6 +32,7 @@ namespace SocialMojifier
         private Lazy<List<SMDetectedFace>> detectedFaces = new Lazy<List<SMDetectedFace>>();
         public SKCanvas canvas;
         public SKSurface surface;
+        public MemoryStream imageStream;
         public EmotionDetection(MediaFile image, string filePath)
         {
             InitializeComponent();
@@ -39,6 +40,7 @@ namespace SocialMojifier
             capture = image;
             DetectEmotion();
             SetImageInImageView(capture);
+            imageStream = new MemoryStream();
         }
 
         public async void DetectEmotion()
@@ -80,6 +82,13 @@ namespace SocialMojifier
                     canvas.DrawBitmap(Image, new SKRect(left, top, left + scaleWidth, top + scaleHeight));
 
                     canvas = skiaDrawingService.DrawPrediction(canvas, detectedFaces.Value.FirstOrDefault().FaceRectangle, left, top, scale, detectedFaces.Value.FirstOrDefault().PredominantEmotion, drawemoji);
+
+                    var m_skImage = surface.Snapshot();
+                    SKRectI rec = new SKRectI((int)left, (int)top, (int)(left + scaleWidth), (int)(top + scaleHeight));
+                    m_skImage = m_skImage.Subset(rec);
+                    var data = m_skImage.Encode(SKEncodedImageFormat.Png, 80);
+                    var ResultImageStream = data.AsStream();
+                    ResultImageStream.CopyTo(imageStream);
                 }
                 catch (Exception ex)
                 {
@@ -119,6 +128,26 @@ namespace SocialMojifier
                 }
             }
             return prop.Name.ToString();
+        }
+
+        private async void ShareButton_Clicked(object sender, EventArgs e)
+        {
+            var data = imageStream;
+            var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            documentsPath = Path.Combine(documentsPath, "SocialMojifier");
+            Directory.CreateDirectory(documentsPath);
+            string filePath = Path.Combine(documentsPath, $"result-{DateTime.Now.ToString()}.jpg");
+            Console.WriteLine(filePath);
+            byte[] bArray = new byte[data.Length];
+            FileStream fs = new FileStream(filePath, FileMode.CreateNew);
+            bArray = imageStream.ToArray();
+            fs.Write(bArray, 0, bArray.Length);
+
+            await Share.RequestAsync(new ShareFileRequest
+            {
+                Title = "Emojified Image",
+                File = new ShareFile(filePath)
+            }) ;
         }
     }
 }

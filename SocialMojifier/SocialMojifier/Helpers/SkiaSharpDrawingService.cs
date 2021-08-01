@@ -31,22 +31,6 @@ namespace SocialMojifier.Helpers
             return canvas;
         }
 
-
-        public void DrawEmotiocon(SKImageInfo info, SKCanvas canvas, string emotion)
-        {
-
-            SKBitmap Image = GetEmojiBitmap(emotion);
-            var scale = Math.Min(info.Width / (float)Image.Width, info.Height / (float)Image.Height);
-
-            var scaleHeight = scale * Image.Height;
-            var scaleWidth = scale * Image.Width;
-
-            var top = (info.Height - scaleHeight) / 2;
-            var left = (info.Width - scaleWidth) / 2;
-
-            canvas.DrawBitmap(Image, new SKRect(left, top, left + scaleWidth, top + scaleHeight));
-        }
-
         public SKBitmap GetEmojiBitmap(string emotion)
         {
             string resourceID = GetEmotionImage.GetImageResourceId(emotion).ToString();
@@ -57,19 +41,6 @@ namespace SocialMojifier.Helpers
                 resourceBitmap = SKBitmap.Decode(stream);
             }
             return resourceBitmap;
-        }
-
-        private SKPath CreateBoxPath(float startLeft, float startTop, float scaledBoxWidth, float scaledBoxHeight)
-        {
-            var path = new SKPath();
-            path.MoveTo(startLeft, startTop);
-
-            path.LineTo(startLeft + scaledBoxWidth, startTop);
-            path.LineTo(startLeft + scaledBoxWidth, startTop + scaledBoxHeight);
-            path.LineTo(startLeft, startTop + scaledBoxHeight);
-            path.LineTo(startLeft, startTop);
-
-            return path;
         }
     }
 }

@@ -34,7 +34,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.Face" Version="2.8.0-preview.1" />
-    <PackageReference Include="Plugin.ImageResizer" Version="1.0.1-alpha" />
     <PackageReference Include="SkiaSharp" Version="2.80.3" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.3" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />

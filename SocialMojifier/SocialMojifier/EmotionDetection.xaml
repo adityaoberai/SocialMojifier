@@ -4,8 +4,20 @@
              xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              x:Class="SocialMojifier.EmotionDetection">
     <ContentPage.Content>
-        <forms:SKCanvasView 
+        <StackLayout>
+            <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+                <Label Text="Emojified Picture" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+            </Frame>
+            <forms:SKCanvasView 
                 x:Name="capturedImage" 
-                PaintSurface="CapturedImage_PaintSurface" />
+                PaintSurface="CapturedImage_PaintSurface" 
+                VerticalOptions="FillAndExpand" />
+            <Button 
+                x:Name="ShareButton"
+                Text="Share"
+                Clicked="ShareButton_Clicked" 
+                VerticalOptions="End"/>
+            <Image x:Name="check"/>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
