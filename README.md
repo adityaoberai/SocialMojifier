@@ -25,4 +25,4 @@ The technologies that I used to build this app are:
 
 ## Download The Android App
 
-Just click here to [get the APK now](https://github.com/adityaoberai/SocialMojifier/releases/tag/v1.0-beta).
+Just click here to [get the APK now](https://github.com/adityaoberai/SocialMojifier/releases/download/v1.0-beta/com.adityaoberai.socialmojifier.apk).
