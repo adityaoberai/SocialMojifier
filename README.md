@@ -1,6 +1,8 @@
 # SocialMojifier
 Emojify yourself for the world!
 
+![Banner](https://adityaoberai.github.io/Assets/img/Projects/Social%20Mojifier.png)
+
 ---
 
 ## Inspiration
