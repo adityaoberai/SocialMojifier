@@ -1,7 +1,7 @@
 # SocialMojifier
 Emojify yourself for the world!
 
-![Banner](https://adityaoberai.github.io/Assets/img/Projects/Social%20Mojifier.png)
+![Banner](https://oberai.dev/Assets/img/Projects/Social%20Mojifier.png)
 
 ---
 
@@ -22,7 +22,3 @@ The technologies that I used to build this app are:
 * **Xamarin.Forms**: to build a cross-platform app using C# (.NET) and XAML
 * **Azure Cognitive Services Face API**: to analyse the emotions on the face of the user
 * **Skia**: to add the emoji mapped to the predominant emotion on the user's face in their selfie
-
-## Download The Android App
-
-Just click here to [get the APK now](https://github.com/adityaoberai/SocialMojifier/releases/download/v1.0-beta/com.adityaoberai.socialmojifier.apk).
